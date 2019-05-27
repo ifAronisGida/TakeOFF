@@ -8,8 +8,12 @@
 
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav>
-          <b-nav-item href="#">Link</b-nav-item>
-          <b-nav-item href="#">Link2</b-nav-item>
+          <b-nav-item href="#"><i class="fas fa-chevron-left"></i></b-nav-item>
+          <b-nav-item href="#">
+            <div id="popcalendar" class="fas fa-calendar-alt">
+            </div>
+          </b-nav-item>
+          <b-nav-item href="#"><i class="fas fa-chevron-right"></i></b-nav-item>
         </b-navbar-nav>
 
         <!-- Right aligned nav items -->
@@ -36,8 +40,11 @@
   </div>
 </template>
 <script>
+import Datepicker from 'vuejs-datepicker';
+
 export default {
   name: 'Navbar',
+  components: { Datepicker },
 };
 </script>
 
