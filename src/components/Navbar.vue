@@ -8,12 +8,8 @@
 
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav>
-          <b-nav-item href="#"><i class="fas fa-chevron-left"></i></b-nav-item>
-          <b-nav-item href="#">
-            <div id="popcalendar" class="fas fa-calendar-alt">
-            </div>
-          </b-nav-item>
-          <b-nav-item href="#"><i class="fas fa-chevron-right"></i></b-nav-item>
+          <datepicker bootstrap-styling="true" :value="date">
+          </datepicker>
         </b-navbar-nav>
 
         <!-- Right aligned nav items -->
@@ -41,10 +37,22 @@
 </template>
 <script>
 import Datepicker from 'vuejs-datepicker';
+import PostService from '@/api-services/post.service';
 
 export default {
   name: 'Navbar',
   components: { Datepicker },
+  data() {
+    return {
+      date: new Date(Date.now()),
+    };
+  },
+  methods: {
+    onClick() {
+      PostService.create({ Id: 1, Description: 'this is a journal' });
+    },
+  },
+
 };
 </script>
 

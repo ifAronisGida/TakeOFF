@@ -21,5 +21,5 @@ export default {
 
   delete(id) {
     return Axios.delete(`${RESOURCE_NAME}/${id}`);
-  }
+  },
 };
