@@ -1,28 +1,34 @@
 <template>
-  <div>
-    <b-card no-body>
-      <b-tabs content-class="mt-3" fill card>
-        <b-tab title="Routine"><one-day :text="posts[0].text"/></b-tab>
-        <b-tab title="Peer"><one-day :text="posts[1].text"/></b-tab>
-        <b-tab title="Journal"><free-style/></b-tab>
-      </b-tabs>
-    </b-card>
+  <div class="container-fluid">
+    <div class="row align-items-start border border-info">
+      <div class="col-sm-1 border border-info">tegnap</div>
+      <div class="col-sm-8 border border-info"><journal/></div>
+      <div class="col-sm-3 border border-info">vállalás</div>
+    </div>
+    <div class="row align-item-center border border-info">
+      <div class="col-sm-3 border border-info"><questions/></div>
+      <div class="col-sm-9 border border-info"><answers/></div>
+    </div>
+    <div class="row align-items-end border border-info">
+      <div class="col border border-info">peer</div>
+    </div>
   </div>
 </template>
 <script>
 import OneDayTab from '@/components/OneDayTab';
-import PostService from '@/api-services/journal.service';
-import FreestyleText from '@/components/FreestyleText';
+import Questions from '@/components/Questions';
+import Journal from '@/components/Journal';
+import Answers from '@/components/Answers';
 
 export default {
   name: 'Home',
   components: {
     'one-day': OneDayTab,
-    'free-style': FreestyleText,
+    Journal,
+    Questions,
+    Answers,
   },
-  created() {
-    PostService.create({ Description: 'this is a journal' });
-  },
+
   data() {
     return {
       posts: [
@@ -33,7 +39,13 @@ export default {
             { id: 2, question: 'Q2', answer: 'daily asdlfkj séodifh aséldk fhaséd hfaosidh fanswer' },
             { id: 3, question: 'question 3', answer: 'daily answer' },
             { id: 4, question: 'question 4', answer: 'daily asdf' },
-            { id: 5, question: 'question 5', answer: 'daiasdfasdfly answer' }] },
+            { id: 5, question: 'question 5', answer: 'daiasdfasdfly answer' },
+            { id: 6, question: 'question 5', answer: 'daiasdfasdfly answer' },
+            { id: 7, question: 'question 5', answer: 'daiasdfasdfly answer' },
+            { id: 8, question: 'question 5', answer: 'daiasdfasdfly answer' },
+            { id: 9, question: 'question 5', answer: 'daiasdfasdfly answer' },
+            { id: 10, question: 'question 5', answer: 'daiasdfasdfly answer' },
+            { id: 101, question: 'question 5', answer: 'daiasdfasdfly answer' }] },
         { id: 2,
           date: '2019-05-11',
           text: [
