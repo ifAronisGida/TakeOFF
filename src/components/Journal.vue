@@ -2,24 +2,32 @@
   <div>
     <b-form-textarea
       id="textarea-rows"
-      :value="journalEntry.description"
+      v-model="posts[6].content"
+      @input="save"
       rows="10"
     ></b-form-textarea>
   </div>
 </template>
 
 <script>
-import JournalService from '@/api-services/journal.service';
+import PostService from '@/api-services/post.service';
 
 export default {
   name: 'Journal',
   data() {
     return {
-      journalEntry: { description: "Mai nap rengeteg dolog történt velem például elmentem sétálni és láttam egy " +
-          "kutyát meg egy virágot és vettem egy palackozott sört is" +
-          "finomat főzőtt anyukám is" +
-          "we like to type!!!4"},
+      posts: [],
     };
+  },
+  created() {
+    PostService.getAll().then((response) => {
+      this.posts = response.data;
+    });
+  },
+  methods: {
+    save() {
+      PostService.update(this.posts[6].id, this.posts[6]);
+    },
   },
 };
 </script>
