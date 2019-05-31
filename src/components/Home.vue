@@ -3,10 +3,11 @@
     <navbar :user="user"></navbar>
     <div class="row d-flex flex-fill align-items-start">
       <div class="col-sm-8"><journal/></div>
-      <div class="col-sm-4"><commitment class="justify-content-center"/></div>
+      <div class="col-sm-4"><commitment :commitments="commitments" class="justify-content-center"/>
+      </div>
     </div>
     <div class="row d-flex flex-fill align-items-center">
-      <div class="col-sm-3"><questions/></div>
+      <div class="col-sm-3"><questions :questions="questions"/></div>
       <div class="col-sm-9"><answers/></div>
     </div>
     <div class="row flex-fill d-flex">
@@ -20,6 +21,7 @@ import Journal from '@/components/Journal';
 import Answers from '@/components/Answers';
 import Commitment from '@/components/Commitment';
 import Navbar from '@/components/Navbar';
+import GoalsService from '@/api-services/goals.service';
 
 export default {
   name: 'Home',
@@ -33,7 +35,21 @@ export default {
   data() {
     return {
       user: '',
+      questions: [],
+      commitments: [],
     };
+  },
+  created() {
+    GoalsService.getAll().then((response) => {
+      // eslint-disable-next-line no-plusplus
+      for (let i = 0; i < response.data.length; i++) {
+        if (response.data[i].goalType === 0) {
+          this.commitments.push(response.data[i]);
+        } else {
+          this.questions.push(response.data[i]);
+        }
+      }
+    });
   },
 };
 </script>
