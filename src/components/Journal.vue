@@ -2,7 +2,7 @@
   <div>
     <b-form-textarea
       id="textarea-rows"
-      v-model="posts[6].content"
+      v-model="posts[0].content"
       @input="save"
       rows="10"
     ></b-form-textarea>
@@ -26,7 +26,7 @@ export default {
   },
   methods: {
     save() {
-      PostService.update(this.posts[6].id, this.posts[6]);
+      PostService.update(this.posts[0].id, this.posts[0]);
     },
   },
 };

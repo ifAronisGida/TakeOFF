@@ -1,5 +1,6 @@
 <template>
   <div class="container-fluid d-flex h-100 flex-column" id="home_container">
+    <navbar :user="user"></navbar>
     <div class="row d-flex flex-fill align-items-start">
       <div class="col-sm-8"><journal/></div>
       <div class="col-sm-4"><commitment class="justify-content-center"/></div>
@@ -18,14 +19,21 @@ import Questions from '@/components/Questions';
 import Journal from '@/components/Journal';
 import Answers from '@/components/Answers';
 import Commitment from '@/components/Commitment';
+import Navbar from '@/components/Navbar';
 
 export default {
   name: 'Home',
   components: {
+    Navbar,
     Journal,
     Questions,
     Answers,
     Commitment,
+  },
+  data() {
+    return {
+      user: '',
+    };
   },
 };
 </script>

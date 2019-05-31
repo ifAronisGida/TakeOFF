@@ -1,18 +1,20 @@
 <template>
   <div id="app" class="container-fluid">
-    <navbar></navbar>
     <router-view/>
   </div>
 </template>
 
 <script>
-import Navbar from '@/components/Navbar';
 import Home from '@/components/Home';
+
 
 export default {
   name: 'App',
+  data() {
+    return {
+    };
+  },
   components: {
-    Navbar,
     Home,
   },
 };

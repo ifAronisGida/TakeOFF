@@ -11,6 +11,8 @@
 </template>
 
 <script>
+import RoutinesService from '@/api-services/dailyroutines.service';
+
 export default {
   name: 'Commitment',
   data() {
@@ -23,6 +25,11 @@ export default {
         { text: 'felvesznek a microsofthoz' },
       ],
     };
+  },
+  created() {
+    RoutinesService.getAll().then((response) => {
+      this.commitments = response.data;
+    });
   },
 };
 </script>

@@ -15,8 +15,51 @@
           <b-nav-item-dropdown right>
             <!-- Using 'button-content' slot -->
             <template slot="button-content"><em>User</em></template>
-            <b-dropdown-item href="#">Profile</b-dropdown-item>
-            <b-dropdown-item href="#">Sign Out</b-dropdown-item>
+            <b-dropdown-item v-if="user !== ''">{{user}}</b-dropdown-item>
+            <b-dropdown-item v-b-modal.login-modal v-if="user === ''">
+              Login
+              <b-modal id="login-modal" title="Please log in">
+                <div>
+                  <b-form-group
+                    id="login-form"
+                    :invalid-feedback="invalidFeedback"
+                    :valid-feedback="validFeedback"
+                    :state="state">
+                    <b-form-input placeholder="email"
+                                  id="input-name"
+                                  v-model="name"
+                                  :state="state"
+                                  trim>email</b-form-input>
+                    <b-form-input placeholder="password"
+                                  id="input-password"
+                                  v-model="password"
+                                  :state="state" trim>password</b-form-input>
+                  </b-form-group>
+                </div>
+              </b-modal>
+            </b-dropdown-item>
+            <b-dropdown-item v-b-modal.register-modal v-if="user === ''">
+              Register
+              <b-modal id="register-modal" title="Please register">
+                <div>
+                  <b-form-group
+                    id="register-form"
+                    :invalid-feedback="invalidFeedback"
+                    :valid-feedback="validFeedback"
+                    :state="state">
+                    <b-form-input placeholder="email"
+                                  id="input-name-reg"
+                                  v-model="name"
+                                  :state="state"
+                                  trim>email</b-form-input>
+                    <b-form-input placeholder="password"
+                                  id="input-password-reg"
+                                  v-model="password"
+                                  :state="state" trim>password</b-form-input>
+                  </b-form-group>
+                </div>
+              </b-modal></b-dropdown-item>
+            <b-dropdown-item v-if="user !== ''">Log out</b-dropdown-item>
           </b-nav-item-dropdown>
         </b-navbar-nav>
       </b-collapse>
@@ -24,23 +67,17 @@
   </div>
 </template>
 <script>
-import Datepicker from 'vuejs-datepicker';
-import PostService from '@/api-services/post.service';
 
 export default {
   name: 'Navbar',
-  components: { Datepicker },
+  props: [
+    'user',
+  ],
   data() {
     return {
       date: new Date(Date.now()),
     };
   },
-  methods: {
-    onClick() {
-      PostService.create({ Id: 1, Description: 'this is a journal' });
-    },
-  },
-
 };
 </script>
 
