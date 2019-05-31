@@ -2,13 +2,13 @@
   <div class="container-fluid d-flex h-100 flex-column" id="home_container">
     <navbar :user="user"></navbar>
     <div class="row d-flex flex-fill align-items-start">
-      <div class="col-sm-8"><journal/></div>
+      <div class="col-sm-8"><journal :journals="journals" @journal-input="saveJournal"/></div>
       <div class="col-sm-4"><commitment :commitments="commitments" class="justify-content-center"/>
       </div>
     </div>
     <div class="row d-flex flex-fill align-items-center">
       <div class="col-sm-3"><questions :questions="questions"/></div>
-      <div class="col-sm-9"><answers/></div>
+      <div class="col-sm-9"><answers :answers="answers"/></div>
     </div>
     <div class="row flex-fill d-flex">
       <div class="col align-self-end">peer</div>
@@ -22,6 +22,7 @@ import Answers from '@/components/Answers';
 import Commitment from '@/components/Commitment';
 import Navbar from '@/components/Navbar';
 import GoalsService from '@/api-services/goals.service';
+import PostService from '@/api-services/post.service';
 
 export default {
   name: 'Home',
@@ -32,11 +33,18 @@ export default {
     Answers,
     Commitment,
   },
+  methods: {
+    saveJournal() {
+      PostService.update(this.journals[0].id, this.journals[0]);
+    },
+  },
   data() {
     return {
       user: '',
       questions: [],
       commitments: [],
+      journals: [],
+      answers: [],
     };
   },
   created() {
@@ -47,6 +55,16 @@ export default {
           this.commitments.push(response.data[i]);
         } else {
           this.questions.push(response.data[i]);
+        }
+      }
+    });
+    PostService.getAll().then((response) => {
+      // eslint-disable-next-line no-plusplus
+      for (let i = 0; i < response.data.length; i++) {
+        if (response.data[i].postType === 0) {
+          this.journals.push(response.data[i]);
+        } else {
+          this.answers.push(response.data[i]);
         }
       }
     });
