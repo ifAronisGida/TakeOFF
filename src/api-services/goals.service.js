@@ -1,6 +1,6 @@
 import Axios from 'axios';
 
-const RESOURCE_NAME = '/DailyRoutines';
+const RESOURCE_NAME = '/Goals';
 
 export default {
   getAll() {
@@ -13,6 +13,10 @@ export default {
 
   create(data) {
     return Axios.post(RESOURCE_NAME, data);
+  },
+
+  createCommit(data) {
+    return Axios.post(`${RESOURCE_NAME}/Commitment`, data);
   },
 
   update(id, data) {

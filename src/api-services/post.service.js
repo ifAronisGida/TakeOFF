@@ -1,5 +1,7 @@
 import Axios from 'axios';
 
+
+// api endpoint url is given to axios, this part just extends it
 const RESOURCE_NAME = '/Posts';
 
 export default {
@@ -11,12 +13,12 @@ export default {
     return Axios.get(`${RESOURCE_NAME}/${id}`);
   },
 
-  create(data) {
-    return Axios.post(RESOURCE_NAME, data);
-  },
-
   update(id, data) {
     return Axios.put(`${RESOURCE_NAME}/${id}`, data);
+  },
+
+  create(data) {
+    return Axios.post(RESOURCE_NAME, data);
   },
 
   delete(id) {

@@ -16,7 +16,7 @@ export default {
   name: 'Journal',
   data() {
     return {
-      posts: [],
+      posts: [{ content: 'ez egy naplóbejegyzés' }],
     };
   },
   created() {
@@ -25,8 +25,8 @@ export default {
     });
   },
   methods: {
-    save() {
-      PostService.update(this.posts[0].id, this.posts[0]);
+    save(id) {
+      PostService.update(this.posts[id].id, this.posts[id]);
     },
   },
 };
